@@ -1,20 +1,34 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# VoiceReader 网页朗读器
 
-# Run and deploy your AI Studio app
+一款免费、无需下载的在线文字转语音（TTS）工具。基于浏览器原生的 Web Speech API，粘贴文字即可朗读，支持中英双语界面、多发音人切换、语速与音调调节。
 
-This contains everything you need to run your app locally.
+**在线体验：** https://read.ft07.com
 
-View your app in AI Studio: https://ai.studio/apps/c93fd34b-8e92-4415-8480-ce73a942bae8
+## 特性
 
-## Run Locally
+- 即贴即读，无需注册，无需安装
+- 使用浏览器本地语音引擎，文字不经过任何服务器
+- 支持切换系统提供的多种发音人（中文、英文等）
+- 语速（0.5x – 2x）与音调（0 – 2）实时调节
+- 中英文界面一键切换
+- 自动跟随系统深色 / 浅色主题
+- 播放 / 暂停 / 继续 / 停止完整控制
 
-**Prerequisites:**  Node.js
+## 浏览器兼容
 
+推荐使用最新版的 **Edge** 或 **Chrome**，发音人最丰富、中文发音最自然。Safari 也可用，但可选发音人较少。
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## 本地开发
+
+```bash
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # 产物输出到 dist/
+npm run lint     # TypeScript 类型检查
+```
+
+技术栈：React 19 + Vite 6 + TypeScript + Tailwind CSS 4 + lucide-react 图标。
+
+## 部署
+
+主分支推送后由 `.github/workflows/deploy.yml` 自动构建并发布到 GitHub Pages，自定义域名通过 `public/CNAME` 配置。
