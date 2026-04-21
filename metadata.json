@@ -1,0 +1,6 @@
+{
+  "name": "文字转语音朗读器",
+  "description": "一个基于浏览器 Web Speech API 的简单网页工具，可以直接朗读输入的文本，支持 Chrome 和 Edge 浏览器。",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
