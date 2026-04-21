@@ -34,3 +34,7 @@ Stack: React 19 · Vite 6 · TypeScript · Tailwind CSS 4 · lucide-react.
 ## Deployment
 
 Pushes to `main` are built and published to GitHub Pages by `.github/workflows/deploy.yml`. The custom domain is wired up via `public/CNAME`.
+
+## License
+
+[MIT](./LICENSE) © Easy Chen

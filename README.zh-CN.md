@@ -34,3 +34,7 @@ npm run lint     # TypeScript 类型检查
 ## 部署
 
 推送到 `main` 分支后由 `.github/workflows/deploy.yml` 自动构建并发布到 GitHub Pages，自定义域名通过 `public/CNAME` 配置。
+
+## 许可协议
+
+[MIT](./LICENSE) © Easy Chen
