@@ -1,34 +1,36 @@
-# VoiceReader 网页朗读器
+# VoiceReader
 
-一款免费、无需下载的在线文字转语音（TTS）工具。基于浏览器原生的 Web Speech API，粘贴文字即可朗读，支持中英双语界面、多发音人切换、语速与音调调节。
+[中文](./README.zh-CN.md)
 
-**在线体验：** https://read.ft07.com
+A free, install-free online Text-to-Speech (TTS) tool. Paste your text and start listening — VoiceReader runs entirely in your browser using the native Web Speech API, so the text never leaves your device.
 
-## 特性
+**Live demo:** https://read.ft07.com
 
-- 即贴即读，无需注册，无需安装
-- 使用浏览器本地语音引擎，文字不经过任何服务器
-- 支持切换系统提供的多种发音人（中文、英文等）
-- 语速（0.5x – 2x）与音调（0 – 2）实时调节
-- 中英文界面一键切换
-- 自动跟随系统深色 / 浅色主题
-- 播放 / 暂停 / 继续 / 停止完整控制
+## Features
 
-## 浏览器兼容
+- Paste and play — no account, no install
+- Runs fully in the browser; text is never sent to any server
+- Switch between every voice your OS / browser exposes (English, Chinese, and more)
+- Adjustable speed (0.5x – 2x) and pitch (0 – 2) in real time
+- Bilingual UI (English / Chinese) — follows your system language by default
+- Automatic light / dark theme — follows `prefers-color-scheme` by default
+- Play, pause, resume, and stop controls
 
-推荐使用最新版的 **Edge** 或 **Chrome**，发音人最丰富、中文发音最自然。Safari 也可用，但可选发音人较少。
+## Browser compatibility
 
-## 本地开发
+Best experience on the latest **Edge** or **Chrome** — they ship the widest set of voices, including high-quality Chinese ones. Safari works too but offers a smaller voice catalog.
+
+## Local development
 
 ```bash
 npm install
 npm run dev      # http://localhost:3000
-npm run build    # 产物输出到 dist/
-npm run lint     # TypeScript 类型检查
+npm run build    # outputs to dist/
+npm run lint     # TypeScript type check
 ```
 
-技术栈：React 19 + Vite 6 + TypeScript + Tailwind CSS 4 + lucide-react 图标。
+Stack: React 19 · Vite 6 · TypeScript · Tailwind CSS 4 · lucide-react.
 
-## 部署
+## Deployment
 
-主分支推送后由 `.github/workflows/deploy.yml` 自动构建并发布到 GitHub Pages，自定义域名通过 `public/CNAME` 配置。
+Pushes to `main` are built and published to GitHub Pages by `.github/workflows/deploy.yml`. The custom domain is wired up via `public/CNAME`.

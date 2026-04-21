@@ -44,27 +44,49 @@ const TRANSLATIONS = {
   }
 };
 
+const STORAGE_LANG = 'voice-reader:lang';
+const STORAGE_THEME = 'voice-reader:theme';
+
+const getSystemLang = (): 'zh' | 'en' =>
+  typeof navigator !== 'undefined' && navigator.language.toLowerCase().startsWith('zh') ? 'zh' : 'en';
+
+const getSystemDark = (): boolean =>
+  typeof window !== 'undefined' && !!window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+
 export default function App() {
-  const [lang, setLang] = useState<'zh' | 'en'>('zh');
+  const [lang, setLang] = useState<'zh' | 'en'>(() => {
+    const stored = typeof localStorage !== 'undefined' ? localStorage.getItem(STORAGE_LANG) : null;
+    return stored === 'zh' || stored === 'en' ? stored : getSystemLang();
+  });
   const t = TRANSLATIONS[lang];
 
   // Dynamically update SEO metadata when language changes
   useEffect(() => {
     document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
     document.title = t.seoTitle;
-    
+
     let metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute('content', t.seoDesc);
     }
   }, [lang, t]);
 
-  const [darkMode, setDarkMode] = useState(false);
-  
+  const [darkMode, setDarkMode] = useState<boolean>(() => {
+    const stored = typeof localStorage !== 'undefined' ? localStorage.getItem(STORAGE_THEME) : null;
+    if (stored === 'dark') return true;
+    if (stored === 'light') return false;
+    return getSystemDark();
+  });
+
+  // Follow OS theme changes while the user hasn't made a manual choice
   useEffect(() => {
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setDarkMode(true);
-    }
+    const mq = window.matchMedia?.('(prefers-color-scheme: dark)');
+    if (!mq) return;
+    const onChange = (e: MediaQueryListEvent) => {
+      if (!localStorage.getItem(STORAGE_THEME)) setDarkMode(e.matches);
+    };
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
   }, []);
 
   useEffect(() => {
@@ -193,7 +215,15 @@ export default function App() {
   }, []);
 
   const toggleLanguage = () => {
-    setLang(lang === 'zh' ? 'en' : 'zh');
+    const next = lang === 'zh' ? 'en' : 'zh';
+    setLang(next);
+    localStorage.setItem(STORAGE_LANG, next);
+  };
+
+  const toggleDarkMode = () => {
+    const next = !darkMode;
+    setDarkMode(next);
+    localStorage.setItem(STORAGE_THEME, next ? 'dark' : 'light');
   };
 
   return (
@@ -226,7 +256,7 @@ export default function App() {
               {t.switchLang}
             </button>
             <button
-              onClick={() => setDarkMode(!darkMode)}
+              onClick={toggleDarkMode}
               className="hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
               title="Toggle theme"
             >
